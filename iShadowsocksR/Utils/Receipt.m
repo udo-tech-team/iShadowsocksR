@@ -62,7 +62,8 @@ NSString *kReceiptExpirationDate                = @"ExpDate";
 
     ERR_load_PKCS7_strings();
     ERR_load_X509_strings();
-    OpenSSL_add_all_digests();
+    // OpenSSL_add_all_digests();
+	OPENSSL_init_crypto(OPENSSL_INIT_ADD_ALL_DIGESTS, NULL);
 
     // Expected input is a PKCS7 container with signed data containing
     // an ASN.1 SET of SEQUENCE structures. Each SEQUENCE contains
@@ -116,7 +117,7 @@ NSString *kReceiptExpirationDate                = @"ExpDate";
         X509_STORE_free(store);
     }
 
-    EVP_cleanup();
+    // EVP_cleanup();
 
     if (verifyReturnValue != 1) {
         PKCS7_free(p7);
